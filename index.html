@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/style/style.css" />
+    <title>Калькулятор</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="calculator">
+        <header class="calculator__header">
+          <div class="calculator__header-wrapper">
+            <div
+              class="calculator__header__rows calculator__header__rows--output"
+            >
+              <div class="calculator__header__output output">1234567890</div>
+            </div>
+            <div class="calculator__header__rows">
+              <div class="calculator__header__item">1</div>
+              <div class="calculator__header__item">2</div>
+              <div class="calculator__header__circle">
+                <span class="circle circle-up">16</span>
+                <span class="circle circle-down">Digit</span>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="calculator__body">
+          <div class="calculator__body__rows">
+            <div class="toggles">Made by Maxim G.</div>
+            <div class="calculator__content-column">
+              <div class="btn-wrapper">
+                <div class="btn">GT</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn">MRC</div>
+              </div>
+            </div>
+            <div class="calculator__content-column">
+              <div class="btn-wrapper">
+                <div class="btn">M-</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn">M+</div>
+              </div>
+            </div>
+          </div>
+          <div class="calculator__body__content">
+            <div class="calculator__content-column">
+              <div class="btn-wrapper">
+                <div class="btn">+TAX</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn">-TAX</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn">RATE</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn">00»0</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--orange btn--clear">CE</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn">+/-</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--orange btn--clear-all">ON|C</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--grey btn--number">0</div>
+              </div>
+            </div>
+            <div
+              class="calculator__content-column calculator__content-column--numbers"
+            >
+              <div class="btn-wrapper">
+                <div class="btn btn--grey btn--number">7</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--grey btn--number">8</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--grey btn--number">9</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--grey btn--number">4</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--grey btn--number">5</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--grey btn--number">6</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--grey btn--number">1</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--grey btn--number">2</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--grey btn--number">3</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--grey btn--number">00</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--grey btn--number">000</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--grey btn--number">.</div>
+              </div>
+            </div>
+            <div
+              class="calculator__content-column calculator__content-column--math-operations"
+            >
+              <div class="btn-wrapper">
+                <div class="btn btn--operation">X</div>
+              </div>
+              <div class="btn-wrapper"><div class="btn">MU</div></div>
+              <div class="btn-wrapper">
+                <div class="btn btn--operation">-</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--operation">%</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--plus btn--operation">+</div>
+              </div>
+              <div class="btn-wrapper">
+                <div class="btn btn--operation">/</div>
+              </div>
+              <div class="btn-wrapper btn-wrapper--equal">
+                <div class="btn btn--operation">=</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="memory">
+        <h1 class="memory__title">Память</h1>
+        <ul class="memory__list"></ul>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
