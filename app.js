@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let firstNumber = "";
   let secondNumber = "";
   let sign = "";
-  let result;
+  let result = "";
 
   output.innerText = "";
 
@@ -28,8 +28,13 @@ document.addEventListener("DOMContentLoaded", function () {
     return a / b;
   }
 
-  function percent() {
-    if (sign == "+" || sign == "-") {
+  function percentOperations() {
+    if (result !== "") {
+      result = result / 100;
+      output.innerText = result;
+      sign = event.target.innerText;
+      addMemory();
+    } else if (sign == "+" || sign == "-" || sign == "") {
       if (secondNumber === "") {
         firstNumber = firstNumber / 100;
         output.innerText = firstNumber;
@@ -43,71 +48,181 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function clearOutput() {
-    output.innerText = "";
-    firstNumber = "";
-    secondNumber = "";
-    sign = "";
+  function incFirstNumber() {
+    firstNumber += event.target.innerText;
+    output.innerText = firstNumber;
   }
 
-  function clearAll() {
-    clearOutput();
-    ul.innerText = "";
+  function incSecondNumber() {
+    secondNumber += event.target.innerText;
+    output.innerText = secondNumber;
+  }
+
+  function doOperations() {
+    if (event.target.innerText == "%") {
+      percentOperations();
+    } else if (event.target.innerText == "=") {
+      if (result !== "") {
+        if (secondNumber === "") {
+          secondNumber = result;
+          output.innerText = result;
+          addMemory();
+        } else {
+          firstNumber = result;
+          if (sign == "+") {
+            result = addition(firstNumber, secondNumber);
+          } else if (sign == "-") {
+            result = substaction(firstNumber, secondNumber);
+          } else if (sign == "X") {
+            result = multiplication(firstNumber, secondNumber);
+          } else if (sign == "/") {
+            result = division(firstNumber, secondNumber);
+          }
+          output.innerText = result;
+          addMemory();
+        }
+      } else {
+        if (sign == "+") {
+          result = addition(firstNumber, secondNumber);
+        } else if (sign == "-") {
+          result = substaction(firstNumber, secondNumber);
+        } else if (sign == "X") {
+          result = multiplication(firstNumber, secondNumber);
+        } else if (sign == "/") {
+          result = division(firstNumber, secondNumber);
+        }
+        output.innerText = result;
+        addMemory();
+      }
+    } else {
+      sign = event.target.innerText;
+    }
+    if (output.innerText.length > 10) {
+      output.innerText = output.innerText.substr(0, 9) + "e";
+    }
   }
 
   for (const number of numbers) {
     number.addEventListener("click", (event) => {
       if (output.innerText.length < 10) {
         if (secondNumber === "" && sign === "") {
-          firstNumber += event.target.innerText;
-          output.innerText = firstNumber;
+          incFirstNumber();
+        } else if (
+          firstNumber !== "" &&
+          secondNumber !== "" &&
+          result !== "" &&
+          sign !== ""
+        ) {
+          firstNumber = result;
+          secondNumber = "";
+          result = "";
+          incSecondNumber();
         } else {
-          secondNumber += event.target.innerText;
-          output.innerText = secondNumber;
+          incSecondNumber();
         }
       } else {
-        console.log("NO, PLEASE, NO!");
+        if (sign !== "" && secondNumber !== "") {
+          secondNumber = "";
+          incSecondNumber();
+        } else if (sign !== "" && secondNumber === "") {
+          incSecondNumber();
+        }
       }
+      // if (output.innerText.length > 10) {}
+      console.log(output.innerText.length);
     });
   }
 
   for (const operation of operations) {
     operation.addEventListener("click", (event) => {
-      if (event.target.innerText == "%") {
-        percent();
-      } else if (event.target.innerText == "=") {
-        if (sign == "+") {
-          result = addition(firstNumber, secondNumber);
-          output.innerText = result;
-          addMemory();
-        } else if (sign == "-") {
-          result = substaction(firstNumber, secondNumber);
-          output.innerText = result;
-          addMemory();
-        } else if (sign == "X") {
-          result = multiplication(firstNumber, secondNumber);
-          output.innerText = result;
-          addMemory();
-        } else if (sign == "/") {
-          result = division(firstNumber, secondNumber);
-          output.innerText = result;
-          addMemory();
-        }
-      } else {
-        sign = event.target.innerText;
-      }
+      console.log(firstNumber, secondNumber, sign);
+      // if (output.innerText.length < 10) {
+      doOperations();
+      // } else {
+      //   sign = event.target.innerText;
+      //   if (event.target.innerText == "%") {
+      //     percent();
+      //   } else if (event.target.innerText == "=") {
+      //     if (result !== "") {
+      //       if (secondNumber === "") {
+      //         secondNumber = result;
+      //         output.innerText = result;
+      //         output.innerText = output.innerText.substr(0, 9) + "e";
+      //         addMemory();
+      //       }
+      //       firstNumber = result;
+      //     }
+      //     if (sign == "+") {
+      //       result = addition(firstNumber, secondNumber);
+      //       output.innerText = result;
+      //       output.innerText = output.innerText.substr(0, 9) + "e";
+      //       addMemory();
+      //     } else if (sign == "-") {
+      //       result = substaction(firstNumber, secondNumber);
+      //       output.innerText = result;
+      //       output.innerText = output.innerText.substr(0, 9) + "e";
+      //       addMemory();
+      //     } else if (sign == "X") {
+      //       result = multiplication(firstNumber, secondNumber);
+      //       output.innerText = result;
+      //       output.innerText = output.innerText.substr(0, 9) + "e";
+      //       addMemory();
+      //     } else if (sign == "/") {
+      //       result = division(firstNumber, secondNumber);
+      //       output.innerText = result;
+      //       output.innerText = output.innerText.substr(0, 9) + "e";
+      //       addMemory();
+      //     }
+      //   } else {
+      //     sign = event.target.innerText;
+      //   }
+      //   addMemory();
+      // }
+      console.log(firstNumber, secondNumber, sign);
     });
   }
 
   const addMemory = function () {
     let li = document.createElement("li");
     li.classList.add("memory__list-item");
-
-    li.textContent =
-      firstNumber + " " + sign + " " + secondNumber + " = " + result;
+    // if (output.innerText.length < 10) {
+    if (sign == "%") {
+      li.textContent =
+        result * 100 + " " + "/ " + "100" + sign + " " + " = " + result;
+    } else {
+      li.textContent =
+        firstNumber + " " + sign + " " + secondNumber + " = " + result;
+    }
 
     ul.appendChild(li);
+    // } else {
+    // output.innerText = output.innerText.substr(0, 11);
+    // li.textContent =
+    //   firstNumber +
+    //   " " +
+    //   sign +
+    //   " " +
+    //   secondNumber +
+    //   " = " +
+    //   result +
+    //   "" +
+    //   "\nХватит, пожалуйста, у меня слабый процессор, я не вывожу.";
+    // ul.appendChild(li);
+    // }
   };
+
+  function clearOutput() {
+    output.innerText = "";
+    firstNumber = "";
+    secondNumber = "";
+    sign = "";
+    result = "";
+  }
+
+  function clearAll() {
+    clearOutput();
+    ul.innerText = "";
+  }
 
   buttonClear.addEventListener("click", clearOutput);
   buttonClearAll.addEventListener("click", clearAll);

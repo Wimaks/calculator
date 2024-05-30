@@ -75,7 +75,8 @@ body {
   font-style: italic;
   text-align: right;
   line-height: 4.5rem;
-  width: 500px;
+  width: fit-content;
+  min-width: 502px;
   height: 100px;
   margin: 25px 40px 10px;
   -webkit-box-shadow: inset 0px -2px 5px 2px rgba(0, 0, 0, 0.7);
