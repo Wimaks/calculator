@@ -128,64 +128,19 @@ document.addEventListener("DOMContentLoaded", function () {
           incSecondNumber();
         }
       }
-      // if (output.innerText.length > 10) {}
-      console.log(output.innerText.length);
     });
   }
 
   for (const operation of operations) {
     operation.addEventListener("click", (event) => {
-      console.log(firstNumber, secondNumber, sign);
-      // if (output.innerText.length < 10) {
       doOperations();
-      // } else {
-      //   sign = event.target.innerText;
-      //   if (event.target.innerText == "%") {
-      //     percent();
-      //   } else if (event.target.innerText == "=") {
-      //     if (result !== "") {
-      //       if (secondNumber === "") {
-      //         secondNumber = result;
-      //         output.innerText = result;
-      //         output.innerText = output.innerText.substr(0, 9) + "e";
-      //         addMemory();
-      //       }
-      //       firstNumber = result;
-      //     }
-      //     if (sign == "+") {
-      //       result = addition(firstNumber, secondNumber);
-      //       output.innerText = result;
-      //       output.innerText = output.innerText.substr(0, 9) + "e";
-      //       addMemory();
-      //     } else if (sign == "-") {
-      //       result = substaction(firstNumber, secondNumber);
-      //       output.innerText = result;
-      //       output.innerText = output.innerText.substr(0, 9) + "e";
-      //       addMemory();
-      //     } else if (sign == "X") {
-      //       result = multiplication(firstNumber, secondNumber);
-      //       output.innerText = result;
-      //       output.innerText = output.innerText.substr(0, 9) + "e";
-      //       addMemory();
-      //     } else if (sign == "/") {
-      //       result = division(firstNumber, secondNumber);
-      //       output.innerText = result;
-      //       output.innerText = output.innerText.substr(0, 9) + "e";
-      //       addMemory();
-      //     }
-      //   } else {
-      //     sign = event.target.innerText;
-      //   }
-      //   addMemory();
-      // }
-      console.log(firstNumber, secondNumber, sign);
     });
   }
 
   const addMemory = function () {
     let li = document.createElement("li");
     li.classList.add("memory__list-item");
-    // if (output.innerText.length < 10) {
+
     if (sign == "%") {
       li.textContent =
         result * 100 + " " + "/ " + "100" + sign + " " + " = " + result;
@@ -195,20 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     ul.appendChild(li);
-    // } else {
-    // output.innerText = output.innerText.substr(0, 11);
-    // li.textContent =
-    //   firstNumber +
-    //   " " +
-    //   sign +
-    //   " " +
-    //   secondNumber +
-    //   " = " +
-    //   result +
-    //   "" +
-    //   "\nХватит, пожалуйста, у меня слабый процессор, я не вывожу.";
-    // ul.appendChild(li);
-    // }
   };
 
   function clearOutput() {
