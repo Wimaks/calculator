@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let result = "";
 
   output.innerText = "";
+  console.log(!"");
 
   function addition(a, b) {
     return +a + +b;
@@ -59,9 +60,27 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function doOperations() {
-    if (event.target.innerText == "%") {
+    let key = event.target.innerText;
+    // switch (key) {
+    //   case "%":
+    //     percentOperations();
+    //     break;
+    //   case "=":
+    //     switch (result) {
+    //       case (!""):
+
+    //         break;
+
+    //       default:
+    //         break;
+    //     }
+    //     break;
+    //   default:
+    //     break;
+    // }
+    if (key == "%") {
       percentOperations();
-    } else if (event.target.innerText == "=") {
+    } else if (key == "=") {
       if (result !== "") {
         if (secondNumber === "") {
           secondNumber = result;
@@ -80,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
           output.innerText = result;
           addMemory();
+          console.log("switch - checkResult");
         }
       } else {
         if (sign == "+") {
@@ -95,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
         addMemory();
       }
     } else {
-      sign = event.target.innerText;
+      sign = key;
     }
     if (output.innerText.length > 10) {
       output.innerText = output.innerText.substr(0, 9) + "e";
