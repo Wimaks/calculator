@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let result = "";
 
   output.innerText = "";
-  console.log(!"");
 
+  //* Мат операции
   function addition(a, b) {
     return +a + +b;
   }
@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return a / b;
   }
 
+  //* Операция "%"
   function percentOperations() {
     if (result !== "") {
       result = result / 100;
@@ -49,79 +50,47 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  //* Набор 1-го числа
   function incFirstNumber() {
     firstNumber += event.target.innerText;
     output.innerText = firstNumber;
+    if (output.innerText.length > 10) {
+      firstNumber = output.innerText.substr(0, 10);
+      output.innerText = output.innerText.substr(0, 10);
+    }
   }
 
+  //* Набор 2-го числа
   function incSecondNumber() {
     secondNumber += event.target.innerText;
     output.innerText = secondNumber;
-  }
-
-  function doOperations() {
-    let key = event.target.innerText;
-    // switch (key) {
-    //   case "%":
-    //     percentOperations();
-    //     break;
-    //   case "=":
-    //     switch (result) {
-    //       case (!""):
-
-    //         break;
-
-    //       default:
-    //         break;
-    //     }
-    //     break;
-    //   default:
-    //     break;
-    // }
-    if (key == "%") {
-      percentOperations();
-    } else if (key == "=") {
-      if (result !== "") {
-        if (secondNumber === "") {
-          secondNumber = result;
-          output.innerText = result;
-          addMemory();
-        } else {
-          firstNumber = result;
-          if (sign == "+") {
-            result = addition(firstNumber, secondNumber);
-          } else if (sign == "-") {
-            result = substaction(firstNumber, secondNumber);
-          } else if (sign == "X") {
-            result = multiplication(firstNumber, secondNumber);
-          } else if (sign == "/") {
-            result = division(firstNumber, secondNumber);
-          }
-          output.innerText = result;
-          addMemory();
-          console.log("switch - checkResult");
-        }
-      } else {
-        if (sign == "+") {
-          result = addition(firstNumber, secondNumber);
-        } else if (sign == "-") {
-          result = substaction(firstNumber, secondNumber);
-        } else if (sign == "X") {
-          result = multiplication(firstNumber, secondNumber);
-        } else if (sign == "/") {
-          result = division(firstNumber, secondNumber);
-        }
-        output.innerText = result;
-        addMemory();
-      }
-    } else {
-      sign = key;
-    }
     if (output.innerText.length > 10) {
-      output.innerText = output.innerText.substr(0, 9) + "e";
+      secondNumber = output.innerText.substr(0, 10);
+      output.innerText = output.innerText.substr(0, 10);
     }
   }
 
+  //* Проверка какой знак нажат и выполнение определенной операции
+  function checkSigns() {
+    switch (sign) {
+      case "+":
+        result = addition(firstNumber, secondNumber);
+        break;
+      case "-":
+        result = substaction(firstNumber, secondNumber);
+        break;
+      case "X":
+        result = multiplication(firstNumber, secondNumber);
+        break;
+      case "/":
+        result = division(firstNumber, secondNumber);
+        break;
+    }
+    output.innerText = result;
+    addMemory();
+  }
+
+  //* Нажатия на кнопки чисел
   for (const number of numbers) {
     number.addEventListener("click", (event) => {
       if (output.innerText.length < 10) {
@@ -151,9 +120,34 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  //* Нажатия на кнопки мат операций
   for (const operation of operations) {
     operation.addEventListener("click", (event) => {
-      doOperations();
+      let key = event.target.innerText;
+      switch (key) {
+        case "%":
+          percentOperations();
+          break;
+        case "=":
+          switch (result) {
+            case "":
+              checkSigns();
+              break;
+
+            default:
+              firstNumber = result;
+              checkSigns();
+              break;
+          }
+          break;
+
+        default:
+          sign = key;
+          break;
+      }
+      if (output.innerText.length > 10) {
+        output.innerText = output.innerText.substr(0, 9) + "e";
+      }
     });
   }
 
@@ -172,6 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ul.appendChild(li);
   };
 
+  //* Очистка данных калькулятора
   function clearOutput() {
     output.innerText = "";
     firstNumber = "";
@@ -180,6 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
     result = "";
   }
 
+  //* + очистка журнала памяти
   function clearAll() {
     clearOutput();
     ul.innerText = "";
